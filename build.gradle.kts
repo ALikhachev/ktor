@@ -307,9 +307,7 @@ val cleanJsLegacyTest by tasks.creating {
 
 tasks.register("assembleAllKotlin") {
     allprojects {
-        // all Kotlin compilation tasks (JVM & MPP)
-        dependsOn(tasks.withType<AbstractKotlinCompile<*>>())
-        // KotlinNativeCompile doesn't inherit from AbstractKotlinCompile (yet)
-        dependsOn(tasks.withType<KotlinNativeCompile>())
+        // all Kotlin compilation tasks (JVM & JS)
+        dependsOn(tasks.withType<AbstractKotlinCompile<*>>().matching { it !is KotlinNativeCompile })
     }
 }
