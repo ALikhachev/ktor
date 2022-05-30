@@ -5,6 +5,7 @@
 import org.jetbrains.dokka.gradle.*
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.targets.js.*
+import org.jetbrains.kotlin.gradle.tasks.*
 import org.jetbrains.kotlin.konan.target.*
 
 buildscript {
@@ -302,4 +303,13 @@ val jsLegacyTest by tasks.creating {
 }
 
 val cleanJsLegacyTest by tasks.creating {
+}
+
+tasks.register("assembleAllKotlin") {
+    allprojects {
+        // all Kotlin compilation tasks (JVM & MPP)
+        dependsOn(tasks.withType<AbstractKotlinCompile<*>>())
+        // KotlinNativeCompile doesn't inherit from AbstractKotlinCompile (yet)
+        dependsOn(tasks.withType<KotlinNativeCompile>())
+    }
 }
