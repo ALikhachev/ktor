@@ -7,7 +7,7 @@ version = "1.0-SNAPSHOT"
 
 plugins {
     application
-    kotlin("jvm") version "1.6.21"
+    kotlin("jvm") version "1.7.20-RC"
 }
 
 repositories {
@@ -28,7 +28,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().all {
     kotlinOptions {
         freeCompilerArgs += listOf(
             "-Xskip-prerelease-check",
-            "-Xuse-experimental=kotlin.ExperimentalUnsignedTypes"
+            "-opt-in=kotlin.ExperimentalUnsignedTypes"
         )
     }
 }
