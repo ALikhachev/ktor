@@ -27,8 +27,10 @@ fun ktorBenchmarks() =
             step {
                 doNotMeasure()
                 runTasks("assembleAllKotlin")
+
             }
             cleanupTasks("clean")
+            repeat = 3U
         }
 
         for ((isParallel, arguments) in listOf(true to parallelArguments, false to nonParallelArguments)) {
