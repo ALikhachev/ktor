@@ -7,7 +7,7 @@ version = "1.0-SNAPSHOT"
 
 plugins {
     application
-    kotlin("jvm") version "1.7.20-RC"
+    kotlin("jvm") version "1.8.0"
 }
 
 repositories {
