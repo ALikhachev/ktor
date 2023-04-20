@@ -2,6 +2,10 @@
 * Copyright 2014-2021 JetBrains s.r.o and contributors. Use of this source code is governed by the Apache 2.0 license.
 */
 
+buildscript {
+    project.extra["kotlin.build.report.output"] = null
+}
+
 plugins {
     id("org.gradle.kotlin.kotlin-dsl") version "3.2.4"
     kotlin("plugin.serialization") version "1.7.20"
