@@ -8,6 +8,9 @@ fun ktorBenchmarks() =
             "--no-build-cache",
             "--info",
             "--watch-fs",
+            "-x", "apiCheck",
+            "-x", "test",
+            "-x", "check",
         )
 
         val parallelArguments = arrayOf(
@@ -20,32 +23,51 @@ fun ktorBenchmarks() =
             "--max-workers=1",
         )
 
+        val k2AdditionalArguments = arrayOf(
+            "-Pkotlin_language_version=2.0",
+            "-Pkotlin_api_version=2.0"
+        )
+
         defaultJdk = System.getenv("JDK_11")
 
-        scenario("parallel clean compile to warmup daemon") {
-            arguments(*parallelArguments)
-            step {
-                doNotMeasure()
-                runTasks("assembleAllKotlin")
+        data class ArgumentsSuit(val name: String, val arguments: Array<String>, val requiresWarmup: Boolean = false)
 
+        val argumentsSuits = listOf(
+            ArgumentsSuit("parallel K1", parallelArguments, requiresWarmup = true),
+            ArgumentsSuit("non-parallel K1", nonParallelArguments),
+            ArgumentsSuit("parallel K2", parallelArguments + k2AdditionalArguments, requiresWarmup = true),
+            ArgumentsSuit("non-parallel K2", nonParallelArguments + k2AdditionalArguments),
+        )
+
+        for (suit in argumentsSuits) {
+
+            if (suit.requiresWarmup) {
+                scenario("parallel clean compile to warmup daemon") {
+                    arguments(*suit.arguments)
+                    step {
+                        doNotMeasure()
+                        runTasks("build")
+                    }
+                    cleanupTasks("clean")
+                    repeat = 3U
+                }
             }
-            cleanupTasks("clean")
-            repeat = 3U
-        }
 
-        for ((isParallel, arguments) in listOf(true to parallelArguments, false to nonParallelArguments)) {
             fun _scenario(name: String, body: ScenarioBuilder.() -> Unit) {
-                scenario("$name (${if (isParallel) "parallel" else "non-parallel"})") {
-                    arguments(*arguments)
+                scenario("$name (${suit.name})") {
+                    arguments(*suit.arguments)
                     body()
                 }
             }
 
             _scenario("Clean compile") {
                 step {
-                    runTasks("assembleAllKotlin")
+                    runTasks("build")
                 }
                 cleanupTasks("clean")
+            }
+            scenario("Stop daemon") {
+                stopDaemon()
             }
         }
     }
