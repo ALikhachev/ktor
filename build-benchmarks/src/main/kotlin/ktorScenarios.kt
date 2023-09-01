@@ -8,9 +8,6 @@ fun ktorBenchmarks() =
             "--no-build-cache",
             "--info",
             "--watch-fs",
-            "-x", "apiCheck",
-            "-x", "test",
-            "-x", "check",
         )
 
         val parallelArguments = arrayOf(
@@ -23,6 +20,11 @@ fun ktorBenchmarks() =
             "--max-workers=1",
         )
 
+        val k1AdditionalArguments = arrayOf(
+            "-Pkotlin_language_version=1.9",
+            "-Pkotlin_api_version=1.9"
+        )
+
         val k2AdditionalArguments = arrayOf(
             "-Pkotlin_language_version=2.0",
             "-Pkotlin_api_version=2.0"
@@ -33,8 +35,8 @@ fun ktorBenchmarks() =
         data class ArgumentsSuit(val name: String, val arguments: Array<String>, val requiresWarmup: Boolean = false)
 
         val argumentsSuits = listOf(
-            ArgumentsSuit("parallel K1", parallelArguments, requiresWarmup = true),
-            ArgumentsSuit("non-parallel K1", nonParallelArguments),
+            ArgumentsSuit("parallel K1", parallelArguments + k1AdditionalArguments, requiresWarmup = true),
+            ArgumentsSuit("non-parallel K1", nonParallelArguments + k1AdditionalArguments),
             ArgumentsSuit("parallel K2", parallelArguments + k2AdditionalArguments, requiresWarmup = true),
             ArgumentsSuit("non-parallel K2", nonParallelArguments + k2AdditionalArguments),
         )
@@ -46,7 +48,7 @@ fun ktorBenchmarks() =
                     arguments(*suit.arguments)
                     step {
                         doNotMeasure()
-                        runTasks("build")
+                        runTasks("assembleAllKotlin")
                     }
                     cleanupTasks("clean")
                     repeat = 3U
@@ -62,7 +64,7 @@ fun ktorBenchmarks() =
 
             _scenario("Clean compile") {
                 step {
-                    runTasks("build")
+                    runTasks("assembleAllKotlin")
                 }
                 cleanupTasks("clean")
             }
