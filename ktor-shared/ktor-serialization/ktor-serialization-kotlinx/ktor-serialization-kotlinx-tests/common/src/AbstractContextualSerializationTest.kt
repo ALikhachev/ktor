@@ -47,7 +47,7 @@ public abstract class AbstractContextualSerializationTest<T : SerialFormat> {
     ): Boolean
 
     @Test
-    public fun testSerializationWithContext(): Unit = testSuspend {
+    public fun testSerializationWithContext(): TestSuspendReturnType = testSuspend {
         val context = serializersModuleOf(UserData::class, UserDataSerializer)
         val contextualSerializer = buildContextualSerializer(context)
         val contextual = KotlinxSerializationConverter(contextualSerializer)

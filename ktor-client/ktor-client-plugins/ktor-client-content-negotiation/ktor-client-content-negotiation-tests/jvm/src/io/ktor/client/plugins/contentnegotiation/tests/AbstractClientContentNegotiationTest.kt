@@ -120,7 +120,7 @@ abstract class AbstractClientContentNegotiationTest : TestWithKtor() {
     }
 
     @Test
-    fun testEmptyBody(): Unit = testWithEngine(MockEngine) {
+    fun testEmptyBody() = testWithEngine(MockEngine) {
         config {
             engine {
                 addHandler { request ->

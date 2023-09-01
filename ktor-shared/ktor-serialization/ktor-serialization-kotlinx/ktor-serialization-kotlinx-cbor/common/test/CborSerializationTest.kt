@@ -6,6 +6,7 @@ package io.ktor.serialization.kotlinx.test.json
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.cbor.*
 import io.ktor.serialization.kotlinx.test.*
+import io.ktor.test.dispatcher.*
 import kotlinx.serialization.*
 import kotlinx.serialization.cbor.*
 import kotlin.test.*
@@ -20,6 +21,7 @@ class CborSerializationTest : AbstractSerializationTest<Cbor>() {
     }
 
     @Ignore
-    override fun testRegisterCustomFlow() {
+    override fun testRegisterCustomFlow(): TestSuspendReturnType {
+        throw Exception()
     }
 }

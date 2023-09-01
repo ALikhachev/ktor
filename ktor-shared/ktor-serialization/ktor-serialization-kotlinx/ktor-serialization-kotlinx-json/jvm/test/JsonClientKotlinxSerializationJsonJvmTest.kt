@@ -25,7 +25,7 @@ class JsonClientKotlinxSerializationJsonJvmTest : AbstractClientContentNegotiati
     }
 
     @Test
-    fun testSequence(): Unit = testWithEngine(CIO) {
+    fun testSequence() = testWithEngine(CIO) {
         configureClient()
 
         test { client ->

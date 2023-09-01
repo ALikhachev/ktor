@@ -7,6 +7,8 @@ package io.ktor.test.dispatcher
 import kotlinx.coroutines.*
 import kotlin.coroutines.*
 
+public actual typealias TestSuspendReturnType = Unit
+
 /**
  * Test runner for jvm suspend tests.
  */
@@ -14,6 +16,6 @@ public actual fun testSuspend(
     context: CoroutineContext,
     timeoutMillis: Long,
     block: suspend CoroutineScope.() -> Unit
-): Unit = runBlocking(context) {
+): TestSuspendReturnType = runBlocking(context) {
     withTimeout(timeoutMillis, block)
 }

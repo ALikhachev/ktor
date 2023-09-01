@@ -7,6 +7,7 @@ package io.ktor.client.tests.utils
 
 import io.ktor.client.engine.*
 import io.ktor.client.engine.js.*
+import io.ktor.test.dispatcher.*
 import kotlinx.coroutines.*
 
 /**
@@ -21,10 +22,10 @@ actual abstract class ClientLoader actual constructor(private val timeoutSeconds
         skipEngines: List<String>,
         onlyWithEngine: String?,
         block: suspend TestClientBuilder<HttpClientEngineConfig>.() -> Unit
-    ): dynamic {
+    ): TestSuspendReturnType {
         val skipEnginesLowerCase = skipEngines.map { it.lowercase() }
         return if ((onlyWithEngine != null && onlyWithEngine != "js") || skipEnginesLowerCase.contains("js")) {
-            GlobalScope.async {}.asPromise()
+            GlobalScope.async {}.asPromiseOfUnit()
         } else {
             testWithEngine(Js) {
                 withTimeout(timeoutSeconds.toLong() * 1000) {

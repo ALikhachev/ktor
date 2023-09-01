@@ -46,7 +46,7 @@ class ContentNegotiationTests {
     }
 
     @Test
-    fun addAcceptHeaders(): Unit = testWithEngine(MockEngine) {
+    fun addAcceptHeaders() = testWithEngine(MockEngine) {
         val registeredTypesToSend = listOf(
             ContentType("testing", "a"),
             ContentType("testing", "b"),
@@ -73,7 +73,7 @@ class ContentNegotiationTests {
     }
 
     @Test
-    fun testKeepsContentType(): Unit = testWithEngine(MockEngine) {
+    fun testKeepsContentType() = testWithEngine(MockEngine) {
         setupWithContentNegotiation {
             register(ContentType("testing", "a"), TestContentConverter())
         }
@@ -135,7 +135,7 @@ class ContentNegotiationTests {
     }
 
     @Test
-    fun replaceContentTypeInRequestPipeline(): Unit = testWithEngine(MockEngine) {
+    fun replaceContentTypeInRequestPipeline() = testWithEngine(MockEngine) {
         val bodyContentType = ContentType("testing", "a")
         val sentContentType = ContentType("testing", "b")
         val serializedOutgoingContent = TextContent("CONTENT", sentContentType)
@@ -161,7 +161,7 @@ class ContentNegotiationTests {
     }
 
     @Test
-    fun selectMatchingConverterInRequestPipeline(): Unit = testWithEngine(MockEngine) {
+    fun selectMatchingConverterInRequestPipeline() = testWithEngine(MockEngine) {
         val types = listOf(
             ContentType("testing", "a"),
             ContentType("testing", "b")
@@ -193,7 +193,7 @@ class ContentNegotiationTests {
     }
 
     @Test
-    fun selectMatchingConverterInResponsePipeline(): Unit = testWithEngine(MockEngine) {
+    fun selectMatchingConverterInResponsePipeline() = testWithEngine(MockEngine) {
         val types = listOf(
             ContentType("testing", "a"),
             ContentType("testing", "b")
@@ -286,7 +286,7 @@ class ContentNegotiationTests {
     }
 
     @Test
-    fun selectFirstNonNullConverterOutputInRequestPipeline(): Unit = testWithEngine(MockEngine) {
+    fun selectFirstNonNullConverterOutputInRequestPipeline() = testWithEngine(MockEngine) {
         val contentTypeToSend = ContentType("testing", "client-send")
         val sentOutgoingContent = TextContent("NON-NULL-RESULT", contentTypeToSend)
 
@@ -316,7 +316,7 @@ class ContentNegotiationTests {
     }
 
     @Test
-    fun selectFirstNonNullConverterOutputInResponsePipeline(): Unit = testWithEngine(MockEngine) {
+    fun selectFirstNonNullConverterOutputInResponsePipeline() = testWithEngine(MockEngine) {
         val contentTypeToReceive = ContentType("testing", "client-send")
         val receivedValue = StringWrapper("NON-NULL-DESERIALIZATION")
 

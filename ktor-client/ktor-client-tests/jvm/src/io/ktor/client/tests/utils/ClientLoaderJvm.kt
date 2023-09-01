@@ -8,6 +8,7 @@ package io.ktor.client.tests.utils
 
 import io.ktor.client.*
 import io.ktor.client.engine.*
+import io.ktor.test.dispatcher.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.debug.*
 import kotlinx.coroutines.debug.junit4.*
@@ -36,7 +37,7 @@ actual abstract class ClientLoader actual constructor(val timeoutSeconds: Int) {
         skipEngines: List<String>,
         onlyWithEngine: String?,
         block: suspend TestClientBuilder<HttpClientEngineConfig>.() -> Unit
-    ) {
+    ): TestSuspendReturnType {
         val locale = Locale.getDefault()
         val engineName = engine.toString().lowercase(locale)
         for (skipEngine in skipEngines) {
@@ -52,18 +53,19 @@ actual abstract class ClientLoader actual constructor(val timeoutSeconds: Int) {
             val engineShouldBeSkipped = "*" == skipEngineName || engineName == skipEngineName
 
             if (platformShouldBeSkipped && engineShouldBeSkipped) {
-                return
+                return TestSuspendReturnType
             }
 
             if (onlyWithEngine != null && engineName != onlyWithEngine) {
-                return
+                return TestSuspendReturnType
             }
         }
 
         val enginesToSkip = skipEngines.map { it.lowercase(locale) }
-        if (engineName in enginesToSkip) return
+        if (engineName in enginesToSkip) return TestSuspendReturnType
 
         testWithEngine(engine.factory, this, timeoutSeconds * 1000L, block)
+        return TestSuspendReturnType
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)

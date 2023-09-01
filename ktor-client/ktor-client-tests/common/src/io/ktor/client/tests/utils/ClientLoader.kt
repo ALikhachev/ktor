@@ -5,6 +5,7 @@
 package io.ktor.client.tests.utils
 
 import io.ktor.client.engine.*
+import io.ktor.test.dispatcher.*
 
 /**
  * Helper interface to test client.
@@ -17,7 +18,7 @@ expect abstract class ClientLoader(timeoutSeconds: Int = 60) {
         skipEngines: List<String> = emptyList(),
         onlyWithEngine: String? = null,
         block: suspend TestClientBuilder<HttpClientEngineConfig>.() -> Unit
-    )
+    ): TestSuspendReturnType
 
     /**
      * Print coroutines in debug mode.
