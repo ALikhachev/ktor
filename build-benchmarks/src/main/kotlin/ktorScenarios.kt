@@ -4,18 +4,20 @@ fun ktorBenchmarks() =
     suite {
         defaultTasks("help")
 
-        defaultArguments(
+        val defaultArguments = arrayOf(
             "--no-build-cache",
             "--info",
             "--watch-fs",
         )
 
-        val parallelArguments = arrayOf(
+        defaultArguments(*defaultArguments)
+
+        val parallelArguments = defaultArguments + arrayOf(
             "--parallel",
             "--max-workers=4",
         )
 
-        val nonParallelArguments = arrayOf(
+        val nonParallelArguments = defaultArguments + arrayOf(
             "--no-parallel",
             "--max-workers=1",
         )
