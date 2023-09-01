@@ -2,6 +2,8 @@
 * Copyright 2014-2021 JetBrains s.r.o and contributors. Use of this source code is governed by the Apache 2.0 license.
 */
 
+@file:OptIn(ExperimentalMultiplatform::class)
+
 package io.ktor.network.selector
 
 import io.ktor.utils.io.core.*
@@ -15,6 +17,7 @@ public actual fun SelectorManager(dispatcher: CoroutineContext): SelectorManager
 /**
  * Selector manager is a service that manages NIO selectors and selection threads
  */
+@AllowDifferentMembersInActual
 public actual interface SelectorManager : CoroutineScope, Closeable {
     /**
      * NIO selector provider

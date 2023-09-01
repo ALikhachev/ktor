@@ -1,4 +1,5 @@
 @file:Suppress("NOTHING_TO_INLINE")
+@file:OptIn(ExperimentalMultiplatform::class)
 
 package io.ktor.utils.io.bits
 
@@ -17,6 +18,7 @@ public actual val MEMORY_EMPTY: Memory = Memory(ByteBuffer.allocate(0).order(Byt
  *
  * Instance of this class has no additional state except the bytes themselves.
  */
+@AllowDifferentMembersInActual
 public actual typealias Memory = ByteBuffer
 
 /**

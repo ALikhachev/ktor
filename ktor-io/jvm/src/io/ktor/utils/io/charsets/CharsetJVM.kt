@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMultiplatform::class)
+
 package io.ktor.utils.io.charsets
 
 import io.ktor.utils.io.bits.*
@@ -9,6 +11,7 @@ import java.nio.charset.*
 
 private const val DECODE_CHAR_BUFFER_SIZE = 8192
 
+@AllowDifferentMembersInActual
 public actual typealias Charset = java.nio.charset.Charset
 
 public actual fun charsetForName(name: String): Charset = java.nio.charset.Charset.forName(name)
@@ -17,6 +20,7 @@ public actual fun isCharsetSupported(charset: String): Boolean = java.nio.charse
 
 public actual val Charset.name: String get() = name()
 
+@AllowDifferentMembersInActual
 public actual typealias CharsetEncoder = java.nio.charset.CharsetEncoder
 
 public actual val CharsetEncoder.charset: Charset get() = charset()
@@ -176,6 +180,7 @@ internal actual fun CharsetDecoder.decodeBuffer(
 
 // -----------------------
 
+@AllowDifferentMembersInActual
 public actual typealias CharsetDecoder = java.nio.charset.CharsetDecoder
 
 public actual val CharsetDecoder.charset: Charset get() = charset()!!

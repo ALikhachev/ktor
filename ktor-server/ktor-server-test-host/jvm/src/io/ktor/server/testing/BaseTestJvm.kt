@@ -3,6 +3,8 @@
  * Copyright 2014-2022 JetBrains s.r.o and contributors. Use of this source code is governed by the Apache 2.0 license.
  */
 
+@file:OptIn(ExperimentalMultiplatform::class)
+
 package io.ktor.server.testing
 
 import kotlinx.coroutines.*
@@ -12,6 +14,7 @@ import org.junit.rules.*
 import kotlin.time.*
 import kotlin.time.Duration.Companion.seconds
 
+@AllowDifferentMembersInActual
 actual abstract class BaseTest actual constructor() {
     actual open val timeout: Duration = 10.seconds
 

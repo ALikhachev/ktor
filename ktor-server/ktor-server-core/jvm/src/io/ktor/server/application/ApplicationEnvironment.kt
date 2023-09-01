@@ -2,6 +2,8 @@
  * Copyright 2014-2021 JetBrains s.r.o and contributors. Use of this source code is governed by the Apache 2.0 license.
  */
 
+@file:OptIn(ExperimentalMultiplatform::class)
+
 package io.ktor.server.application
 
 import io.ktor.events.*
@@ -12,6 +14,7 @@ import kotlin.coroutines.*
 /**
  * Represents an environment in which [Application] runs
  */
+@AllowDifferentMembersInActual
 public actual interface ApplicationEnvironment {
 
     /**

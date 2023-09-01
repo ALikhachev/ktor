@@ -1,7 +1,11 @@
 package io.ktor.utils.io.core
 
-public actual interface Closeable {
-    public actual fun close()
+public actual interface AutoCloseable {
+    actual public fun close()
+}
+
+public actual interface Closeable : AutoCloseable {
+    public actual override fun close()
 }
 
 @PublishedApi

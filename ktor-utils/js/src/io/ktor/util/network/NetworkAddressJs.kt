@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMultiplatform::class)
+
 /*
 * Copyright 2014-2021 JetBrains s.r.o and contributors. Use of this source code is governed by the Apache 2.0 license.
 */
@@ -11,6 +13,7 @@ package io.ktor.util.network
  *
  * @throws UnresolvedAddressException if the [hostname] cannot be resolved.
  */
+@AllowDifferentMembersInActual
 public actual abstract class NetworkAddress internal constructor(
     internal val hostname: String,
     internal val port: Int,

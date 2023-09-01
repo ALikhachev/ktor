@@ -1,7 +1,13 @@
+@file:OptIn(ExperimentalStdlibApi::class)
+
 package io.ktor.utils.io.core
 
-public expect interface Closeable {
+public expect interface AutoCloseable {
     public fun close()
+}
+
+public expect interface Closeable : AutoCloseable {
+    public override fun close()
 }
 
 public inline fun <C : Closeable, R> C.use(block: (C) -> R): R {
