@@ -1,12 +1,9 @@
-@file:OptIn(ExperimentalMultiplatform::class)
-
 package io.ktor.utils.io.charsets
 
 import io.ktor.utils.io.core.*
 import io.ktor.utils.io.js.*
 import org.khronos.webgl.*
 
-@AllowDifferentMembersInActual
 public actual abstract class Charset(internal val _name: String) {
     public actual abstract fun newEncoder(): CharsetEncoder
     public actual abstract fun newDecoder(): CharsetDecoder
@@ -54,7 +51,6 @@ public actual fun isCharsetSupported(charset: String): Boolean = when {
 public actual val Charset.name: String get() = _name
 
 // -----------------------
-@AllowDifferentMembersInActual
 public actual abstract class CharsetEncoder(internal val _charset: Charset)
 private data class CharsetEncoderImpl(private val charset: Charset) : CharsetEncoder(charset)
 
@@ -103,7 +99,6 @@ public actual fun CharsetEncoder.encodeUTF8(input: ByteReadPacket, dst: Output) 
 internal actual fun CharsetEncoder.encodeComplete(dst: Buffer): Boolean = true
 
 // ----------------------------------------------------------------------
-@AllowDifferentMembersInActual
 public actual abstract class CharsetDecoder(internal val _charset: Charset)
 
 private data class CharsetDecoderImpl(private val charset: Charset) : CharsetDecoder(charset)

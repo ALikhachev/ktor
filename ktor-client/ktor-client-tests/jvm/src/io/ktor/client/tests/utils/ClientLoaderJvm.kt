@@ -2,8 +2,6 @@
  * Copyright 2014-2022 JetBrains s.r.o and contributors. Use of this source code is governed by the Apache 2.0 license.
  */
 
-@file:OptIn(ExperimentalMultiplatform::class)
-
 package io.ktor.client.tests.utils
 
 import io.ktor.client.*
@@ -20,7 +18,6 @@ import java.util.*
 /**
  * Helper interface to test client.
  */
-@AllowDifferentMembersInActual
 @RunWith(Parameterized::class)
 actual abstract class ClientLoader actual constructor(val timeoutSeconds: Int) {
 

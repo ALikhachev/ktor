@@ -2,8 +2,6 @@
  * Copyright 2014-2019 JetBrains s.r.o and contributors. Use of this source code is governed by the Apache 2.0 license.
  */
 
-@file:OptIn(ExperimentalMultiplatform::class)
-
 package io.ktor.websocket
 
 import io.ktor.util.*
@@ -18,7 +16,6 @@ import java.nio.*
  * @property data - a frame content or fragment content
  * @property disposableHandle could be invoked when the frame is processed
  */
-@AllowDifferentMembersInActual
 public actual sealed class Frame actual constructor(
     public actual val fin: Boolean,
     public actual val frameType: FrameType,

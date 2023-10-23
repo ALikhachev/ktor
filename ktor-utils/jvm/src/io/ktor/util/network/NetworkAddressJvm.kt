@@ -2,8 +2,6 @@
 * Copyright 2014-2021 JetBrains s.r.o and contributors. Use of this source code is governed by the Apache 2.0 license.
 */
 
-@file:OptIn(ExperimentalMultiplatform::class)
-
 package io.ktor.util.network
 
 import java.net.*
@@ -15,7 +13,6 @@ import java.net.*
  *
  * @throws UnresolvedAddressException if the [hostname] cannot be resolved.
  */
-@AllowDifferentMembersInActual
 public actual typealias NetworkAddress = SocketAddress
 
 public actual val NetworkAddress.hostname: String

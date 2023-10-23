@@ -2,13 +2,10 @@
  * Copyright 2014-2022 JetBrains s.r.o and contributors. Use of this source code is governed by the Apache 2.0 license.
  */
 
-@file:OptIn(ExperimentalMultiplatform::class)
-
 package io.ktor.network.sockets
 
 import java.lang.reflect.*
 
-@AllowDifferentMembersInActual
 public actual sealed class SocketAddress {
     internal abstract val address: java.net.SocketAddress
 }

@@ -1,13 +1,10 @@
 // ktlint-disable filename
-@file:OptIn(ExperimentalMultiplatform::class)
-
 package io.ktor.network.selector
 
 import kotlinx.coroutines.*
 import java.io.*
 import java.nio.channels.*
 
-@AllowDifferentMembersInActual
 public actual interface Selectable : Closeable, DisposableHandle {
     /**
      * Current selectable suspensions map

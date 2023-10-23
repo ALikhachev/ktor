@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalMultiplatform::class)
-
 // ktlint-disable filename
 package io.ktor.utils.io
 
@@ -14,7 +12,6 @@ import org.khronos.webgl.*
  *
  * Operations on this channel cannot be invoked concurrently.
  */
-@AllowDifferentMembersInActual
 public actual interface ByteReadChannel {
     /**
      * Returns number of bytes that can be read without suspension. Read operations do no suspend and return
