@@ -46,7 +46,7 @@ fun ktorBenchmarks() =
         for (suit in argumentsSuits) {
 
             if (suit.requiresWarmup) {
-                scenario("parallel clean compile to warmup daemon") {
+                scenario("parallel clean compile to warmup daemon ${suit.name}") {
                     arguments(*suit.arguments)
                     step {
                         doNotMeasure()
