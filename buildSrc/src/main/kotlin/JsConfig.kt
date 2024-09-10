@@ -45,7 +45,6 @@ private fun Project.configureJsTasks() {
 
             val main by compilations.getting
             main.kotlinOptions.apply {
-                metaInfo = true
                 sourceMap = true
                 moduleKind = "umd"
                 this.main = "noCall"
@@ -54,7 +53,6 @@ private fun Project.configureJsTasks() {
 
             val test by compilations.getting
             test.kotlinOptions.apply {
-                metaInfo = true
                 sourceMap = true
                 moduleKind = "umd"
                 this.main = "call"
