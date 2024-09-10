@@ -2,9 +2,9 @@
  * Copyright 2014-2020 JetBrains s.r.o and contributors. Use of this source code is governed by the Apache 2.0 license.
  */
 
+import kotlinx.atomicfu.plugin.gradle.AtomicFUPluginExtension
 import org.jetbrains.dokka.gradle.*
 import org.jetbrains.kotlin.gradle.dsl.*
-import org.jetbrains.kotlin.gradle.targets.js.*
 import org.jetbrains.kotlin.gradle.tasks.*
 import org.jetbrains.kotlin.konan.target.*
 
@@ -139,6 +139,10 @@ allprojects {
     apply(plugin = "kotlin-multiplatform")
     apply(plugin = "kotlinx-atomicfu")
 
+    extensions.configure<AtomicFUPluginExtension> {
+        transformJs = false
+    }
+
     configureTargets()
 
     configurations {
@@ -148,7 +152,7 @@ allprojects {
     configurations.configureEach {
         if (isCanBeResolved) {
             resolutionStrategy.eachDependency {
-                if (requested.group == "org.jetbrains.kotlin") {
+                if (requested.group == "org.jetbrains.kotlin" && requested.name != "kotlin-native-prebuilt") {
                     useVersion(kotlinVersion)
                 }
             }
