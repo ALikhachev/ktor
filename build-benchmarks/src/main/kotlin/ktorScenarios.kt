@@ -28,8 +28,8 @@ fun ktorBenchmarks() =
         )
 
         val k2AdditionalArguments = arrayOf(
-            "-Pkotlin_language_version=2.0",
-            "-Pkotlin_api_version=2.0"
+            "-Pkotlin_language_version=2.1",
+            "-Pkotlin_api_version=2.1"
         )
 
         defaultJdk = System.getenv("JDK_11")

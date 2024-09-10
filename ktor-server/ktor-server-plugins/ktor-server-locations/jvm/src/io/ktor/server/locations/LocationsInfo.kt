@@ -16,6 +16,7 @@ import kotlin.reflect.*
  * @property queryParameters is a list of properties stored in query parameters
  */
 @KtorExperimentalLocationsAPI
+@ConsistentCopyVisibility
 public data class LocationInfo internal constructor(
     val klass: KClass<*>,
     val parent: LocationInfo?,
